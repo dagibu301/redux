@@ -1,17 +1,19 @@
-import Counter from './components/Counter';
+import { useSelector } from 'react-redux';
 import Header from './components/Header';
 import Auth from './components/Auth';
-import { Provider } from 'react-redux';
-import store from './store';
+import UserProfile from './components/UserProfile';
+import Counter from './components/Counter';
 
-function App() {
+const App = () => {
+  const isAuth = useSelector((state) => state.auth.isAuthenticated);
+
   return (
-    <Provider store={store}>
+    <>
       <Header />
-      <Auth />
+      {isAuth ? <UserProfile /> : <Auth />}
       <Counter />
-    </Provider>
+    </>
   );
-}
+};
 
 export default App;
